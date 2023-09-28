@@ -1,0 +1,14 @@
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.next();
+        String s2 = sc.next();
+        StringBuilder sb = new StringBuilder(s1);
+        s1 = sb.reverse().toString();
+        sb = new StringBuilder(s2);
+        s2 = sb.reverse().toString();
+        int result = Math.max(Integer.parseInt(s1), Integer.parseInt(s2));
+        System.out.println(result);
+}
+}
