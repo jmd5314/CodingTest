@@ -1,15 +1,8 @@
-import java.io.*;
 import java.util.*;
 
 public class Main {
     public static int dp[];
     public static int stairs[];
-    public static int  max_stairs(int N){
-        if(dp[N]==-1){
-            dp[N] = Math.max(max_stairs(N - 2), max_stairs(N - 3) + stairs[N - 1]) + stairs[N];
-        }
-        return dp[N];
-    }
     public static void main(String[] args)  {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
@@ -24,6 +17,9 @@ public class Main {
         if(N>=2){
             dp[2] = stairs[1] + stairs[2];
         }
-        System.out.println(max_stairs(N));
+        for(int i =3;i<=N;i++){
+            dp[i] = Math.max(dp[i - 3] + stairs[i - 1], dp[i - 2]) + stairs[i];
+        }
+        System.out.println(dp[N]);
     }
 }
