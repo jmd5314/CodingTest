@@ -7,6 +7,7 @@ class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N  = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
+        // count 값이 int 범위를 충분히 넘을 수 있기때문에 long으로 선언한다.
         long count = 0;
         int num[] = new int[N];
         int rem[] = new int[M];
