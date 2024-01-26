@@ -5,6 +5,7 @@ class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
         String S  = st.nextToken();
         st= new StringTokenizer(br.readLine());
         int q = Integer.parseInt(st.nextToken());
@@ -26,10 +27,10 @@ class Main {
             int l = Integer.parseInt(st.nextToken());
             int r = Integer.parseInt(st.nextToken());
             if(l==0)
-                System.out.println(count[r][a-'a']);
+                sb.append(count[r][a-'a']).append("\n");
             else
-                System.out.println(count[r][a-'a'] - count[l-1][a-'a']);
-            
+                sb.append(count[r][a-'a'] - count[l-1][a-'a']).append("\n");
         }
+        System.out.println(sb);
     }
 }
