@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static StringBuilder sb = new StringBuilder();
     static int[][] square;
     static int count1=0,count2=0,count3=0;
     public static void countSquare(int start_i,int start_j,int size){
@@ -30,7 +29,6 @@ public class Main {
             count2++;
         else
             count3++;
-        sb.append(num);
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
