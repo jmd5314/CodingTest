@@ -37,12 +37,14 @@ public class Main {
         q.add(new Node(K, 0));
         while (!q.isEmpty()){
             Node now = q.poll();
+            // 이전의 bfs 방식과 달리 q에서 꺼낸 뒤에 check를 하는 이유는 우선순위 큐이기 때문에 넣은 순서에 따라 poll 되지 않기 때문
             if(!check[now.end])
                 check[now.end] = true;
             for(int i =0;i<list[now.end].size();i++){
                 Node next = list[now.end].get(i);
                 // 현재 가중치 + 해당 정점으로 향하는 가중치의 값 < 해당 정점으로의 최단 경로 값이면
                 if(!check[next.end]&&now.weight+next.weight<result[next.end]){
+                    // 최단거리 값 초기화
                     result[next.end] = now.weight + next.weight;
                     q.add(new Node(next.end, result[next.end]));
                 }
