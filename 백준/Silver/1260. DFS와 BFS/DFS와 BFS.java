@@ -1,57 +1,63 @@
-import java.util.*;
 import java.io.*;
-
+import java.util.*;
 public class Main {
-    static int[][] arr;
-    static boolean[] visited;
+    static int N,M,V;
+    static List<Integer>[] graph;
+    static boolean check[];
+    static StringBuilder sbd = new StringBuilder();
+    static StringBuilder sbb = new StringBuilder();
 
-    public static void dfs(int V){
-        visited[V] = true;
-        System.out.print(V+" ");
-        if(V==arr.length){
-            return;
-        }
-        for(int j=1;j<arr.length;j++){
-            //연결은 되어있는데, 방문은 안했으면 재귀
-            if(arr[V][j]==1&&!visited[j]){
-                dfs(j);
+    public static void bfs(int start) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+        check[start] = true;
+        while (!q.isEmpty()){
+            int now = q.poll();
+            sbb.append(now + " ");
+            for(int next:graph[now]){
+                if(!check[next]){
+                    q.add(next);
+                    check[next] = true;
+                }
             }
         }
+
     }
-    public static void bfs(int V){
-        Queue<Integer> queue = new LinkedList<Integer>();
-        queue.add(V);
-        visited[V] = true;
-        System.out.print(V+" ");
-        while (!queue.isEmpty()){
-            int tmp = queue.poll();
-            for(int i =1;i<arr.length;i++){
-                if(arr[tmp][i]==1&&!visited[i]){
-                    queue.add(i);
-                    visited[i] = true;
-                    System.out.print(i+" ");
-                }
+    public static void dfs(int v){
+        check[v] = true;
+        sbd.append(v + " ");
+        for(int next:graph[v]){
+            if(!check[next]){
+                dfs(next);
             }
         }
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        int V = Integer.parseInt(st.nextToken());
-        arr = new int[N+1][N+1];
-        for(int i = 0;i<M;i++){
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
+        V = Integer.parseInt(st.nextToken());
+        graph = new List[N + 1];
+        check = new boolean[N + 1];
+        for(int i =1;i<=N;i++){
+            graph[i] = new ArrayList<>();
+        }
+        for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            arr[a][b] = 1;
-            arr[b][a] = 1;
+            graph[a].add(b);
+            graph[b].add(a);
         }
-        visited = new boolean[N+1];
+        // 오름차순 정렬 탐색할 수 있는 곳이 여러 곳일 경우 낮은 숫자부터 탐색해야 하기때문!
+        for(int i =1;i<=N;i++){
+            Collections.sort(graph[i]);
+        }
         dfs(V);
-        System.out.println();
-        visited = new boolean[N+1];
+        System.out.println(sbd);
+        check = new boolean[N + 1];
         bfs(V);
+        System.out.println(sbb);
     }
 }
